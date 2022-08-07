@@ -1,7 +1,10 @@
 <template>
 <div class="main">
     <div :key="session.id" v-for="session in sessions">
-        <Session :session="session" />
+        <Session 
+        @delete-session="$emit('delete-session', session.id)" 
+        @toggle-reminder="$emit('toggle-reminder', session.id)"
+        :session="session" />
     </div>
 </div>
 </template>
@@ -16,7 +19,8 @@ export default {
     },
     components: { 
         Session 
-    }
+    },
+  emits: ['delete-session', 'toggle-reminder'],
 }
 </script>
 

@@ -1,23 +1,42 @@
 <template>
 <div class="container">
-    <Header title="exercise planner." />
-    <Sessions :sessions="sessions" />
+    <Header title="exercise plan." />
+    <AddSession @add-session="addSession" />
+    <Sessions 
+      @delete-session="deleteSession" 
+      @toggle-reminder="toggleReminder"
+      :sessions="sessions" />
 </div>
 </template>
 
 <script>
+import { thisExpression, tsAnyKeyword } from '@babel/types'
 import Header from './components/Header'
 import Sessions from './components/Sessions'
+import AddSession from './components/AddSession.vue'
 
 export default {
   name: 'App',
   components: {
     Header,
     Sessions,
-  },
+    AddSession,
+},
   data() {
     return {
       sessions: [],
+    }
+  },
+  methods: {
+    deleteSession(id) {
+        if (confirm("are you sure?")) {
+        this.sessions = this.sessions.filter((session) => session.id !== id)
+      }
+    },
+    toggleReminder(id) {
+      console.log("reminder set for session", id);
+      this.sessions = this.sessions.map( (session) =>
+      session.id === id ? {...session, reminder: !session.reminder} : session)
     }
   },
   created() {
@@ -25,26 +44,18 @@ export default {
       {
         id: 1,
         date: "2022-08-03",
-        exercises: {
-          exercise1: "Push-ups",
-          exercise2: "Goblet Squats",
-          exercise3: "Kettlebell Snatch",
-          exercise4: "Kettlebell Halo"
-        },
+        exercises: ["Push-ups", "Goblet Squats", "Kettlebell Snatch", "Kettlebell Halo"],
         sets: 3,
         reps: 10,
+        reminder: false,
       },
       {
         id: 2,
         date: "2022-08-05",
-        exercises: {
-          exercise1: "Mountain Climbers",
-          exercise2: "Kettlebell Swing",
-          exercise3: "Kettlebell Row",
-          exercise4: "Kettlebell Halo"
-        },
+        exercises: [ "Mountain Climbers","Kettlebell Swing","Kettlebell Row","Kettlebell Halo"],
         sets: 3,
         reps: 10,
+        reminder: true,
       },
     ]
   }
