@@ -1,10 +1,12 @@
 <template>
 <div class="container">
-    <Header title="exercise plan." />
-    <AddSession @add-session="addSession" />
+    <Header :showAddSession="showAddSession" @toggle-add-session="toggleAddSession" title="exercise plan." />
+    <AddSession v-show="showAddSession" @toggle-add-session="toggleAddSession" @add-session="addSession" />
     <Sessions 
-      @delete-session="deleteSession" 
-      @toggle-reminder="toggleReminder"
+        @toggle-reminder="toggleReminder"
+        @edit-session="editSession"
+        @duplicate-session="duplicateSession"
+        @delete-session="deleteSession"
       :sessions="sessions" />
 </div>
 </template>
@@ -25,6 +27,7 @@ export default {
   data() {
     return {
       sessions: [],
+      showAddSession: false
     }
   },
   methods: {
@@ -33,10 +36,22 @@ export default {
         this.sessions = this.sessions.filter((session) => session.id !== id)
       }
     },
+    addSession(session) {
+      this.sessions = [...this.sessions, session]
+    },
+    editSession(id) {
+      console.log("Editing session nr", id);
+    },
+    duplicateSession(id) {
+      console.log("Duplicated session nr", id);
+    },
     toggleReminder(id) {
       console.log("reminder set for session", id);
       this.sessions = this.sessions.map( (session) =>
       session.id === id ? {...session, reminder: !session.reminder} : session)
+    },
+    toggleAddSession() {
+      this.showAddSession=!this.showAddSession;
     }
   },
   created() {
@@ -74,11 +89,11 @@ body {
   font-family: 'Poppins', sans-serif;
 }
 .container {
-  max-width: 500px;
+  max-width: 800px;
   margin: 30px auto;
   overflow: auto;
   min-height: 300px;
-  border: 1px solid steelblue;
+  border: 1px solid black;
   padding: 30px;
   border-radius: 5px;
 }

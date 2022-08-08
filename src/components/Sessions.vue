@@ -2,8 +2,10 @@
 <div class="main">
     <div :key="session.id" v-for="session in sessions">
         <Session 
-        @delete-session="$emit('delete-session', session.id)" 
         @toggle-reminder="$emit('toggle-reminder', session.id)"
+        @edit-session="$emit('edit-session', session.id)"
+        @duplicate-session="$emit('duplicate-session', session.id)"
+        @delete-session="$emit('delete-session', session.id)"
         :session="session" />
     </div>
 </div>
@@ -20,13 +22,15 @@ export default {
     components: { 
         Session 
     },
-  emits: ['delete-session', 'toggle-reminder'],
+          emits: ['edit-session','duplicate-session', 'delete-session', 'toggle-reminder'],
 }
 </script>
 
 <style scoped>
     .main {
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: 45% 45%;
+        column-gap: 10%;
+        row-gap: 30px;
     }
 </style>
