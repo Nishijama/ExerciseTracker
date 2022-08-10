@@ -1,13 +1,23 @@
 <template>
 <div class="container">
-    <Header :showAddSession="showAddSession" @toggle-add-session="toggleAddSession" title="exercise plan." />
-    <AddSession v-show="showAddSession" @toggle-add-session="toggleAddSession" @add-session="addSession" />
+    <Header 
+        :showAddSession="showAddSession" 
+        @toggle-add-session="toggleAddSession" 
+        title="exercise plan." />
+    
+    
+    <AddSession 
+        v-show="showAddSession" 
+        @toggle-add-session="toggleAddSession" 
+        @add-session="addSession" />
+
     <Sessions 
+        @toggle-add-session="toggleAddSession"
         @toggle-reminder="toggleReminder"
         @edit-session="editSession"
         @duplicate-session="duplicateSession"
         @delete-session="deleteSession"
-      :sessions="sessions" />
+        :sessions="sessions" />
 </div>
 </template>
 
@@ -24,26 +34,43 @@ export default {
     Sessions,
     AddSession,
 },
+
   data() {
     return {
       sessions: [],
       showAddSession: false
     }
   },
+
   methods: {
     deleteSession(id) {
         if (confirm("are you sure?")) {
         this.sessions = this.sessions.filter((session) => session.id !== id)
       }
     },
-    addSession(session) {
-      this.sessions = [...this.sessions, session]
+    addSession(newSession) {
+      this.sessions = this.sessions.map( (session) =>
+      session.id !== newSession.id ? {...session, new: false} : session)
+      newSession.new = true;
+      this.sessions = [...this.sessions, newSession]
     },
     editSession(id) {
       console.log("Editing session nr", id);
     },
-    duplicateSession(id) {
-      console.log("Duplicated session nr", id);
+    setNew(newSession) {
+      this.sessions = this.sessions.map( (session) =>
+        session.id !== newSession.id ? {...session, new: false} : session)
+      newSession.new = true
+    },
+
+    duplicateSession(session) {
+      console.log("Duplicated session nr", session.id);
+      let newSession = JSON.parse(JSON.stringify(session))
+      newSession.id = this.sessions.length
+      this.setNew(newSession)
+      // this.sessions.unshift(newSession)
+      this.sessions = [...this.sessions, newSession]
+      console.log(this.sessions);
     },
     toggleReminder(id) {
       console.log("reminder set for session", id);
@@ -57,20 +84,22 @@ export default {
   created() {
     this.sessions = [
       {
-        id: 1,
+        id: 0,
         date: "2022-08-03",
         exercises: ["Push-ups", "Goblet Squats", "Kettlebell Snatch", "Kettlebell Halo"],
         sets: 3,
         reps: 10,
         reminder: false,
+        new: false,
       },
       {
-        id: 2,
+        id: 1,
         date: "2022-08-05",
         exercises: [ "Mountain Climbers","Kettlebell Swing","Kettlebell Row","Kettlebell Halo"],
         sets: 3,
         reps: 10,
         reminder: true,
+        new:false,
       },
     ]
   }
