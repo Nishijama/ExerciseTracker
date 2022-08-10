@@ -1,4 +1,5 @@
 # Exercise Planner
+![screenshot](./src/assets/screenshot.png)
 
 ## Technology
 
@@ -6,6 +7,13 @@
 * JavaScript
 * HTML
 * CSS
+
+### Features
+* Load exercise sessions from JSON file
+* Add, display, edit, delete sessions
+* Add reminders to your sessions
+* Animate transitions
+* Save data to JSON server
 
 ## Project setup
 ```
