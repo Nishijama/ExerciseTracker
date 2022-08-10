@@ -1,4 +1,11 @@
-# vue-crashcourse
+# Exercise Planner
+
+## Technology
+
+* VueJS
+* JavaScript
+* HTML
+* CSS
 
 ## Project setup
 ```

@@ -3,8 +3,8 @@
     <div :key="session.id" v-for="session in sessions">
         <Session 
         @toggle-reminder="$emit('toggle-reminder', session.id)"
-        @edit-session="$emit('edit-session', session.id)"
-        @duplicate-session="$emit('duplicate-session', session.id)"
+        @toggle-add-session="$emit('toggle-add-session')"
+        @duplicate-session="$emit('duplicate-session', session)"
         @delete-session="$emit('delete-session', session.id)"
         :session="session" />
     </div>
@@ -22,7 +22,7 @@ export default {
     components: { 
         Session 
     },
-          emits: ['edit-session','duplicate-session', 'delete-session', 'toggle-reminder'],
+          emits: ['edit-session','duplicate-session', 'delete-session', 'toggle-reminder','toggle-add-session'],
 }
 </script>
 

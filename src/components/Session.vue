@@ -1,5 +1,5 @@
 <template>
-    <div :class="[session.reminder ? 'reminder': '', 'session_card']">
+    <div :class="[session.reminder ? 'reminder': '', session.new ? 'new': '', 'session_card']">
         <div class="card_inner_div">
             <h3>{{session.date}} </h3>
             <h5>{{session.sets}} x {{session.reps}}</h5>
@@ -7,8 +7,8 @@
         </div>
         <div class="icons">
             <i @click="$emit('toggle-reminder', session.id)" class="fas fa-thin fa-bell"></i> 
-            <i @click="$emit('edit-session', session.id)" class="fas fa-thin fa-edit"></i> 
-            <i @click="$emit('duplicate-session', session.id)" class="fas fa-thin fa-copy"></i> 
+            <i @click="editSession()" class="fas fa-thin fa-edit"></i> 
+            <i @click="$emit('duplicate-session', session)" class="fas fa-thin fa-copy"></i> 
             <i @click="$emit('delete-session', session.id)" class="fas fa-thin fa-trash"></i> 
         </div>
 
@@ -22,11 +22,22 @@
         props: {
             session: Object,
         },
-        emits: ['edit-session','duplicate-session', 'delete-session', 'toggle-reminder']
+        methods:{
+            editSession(session) {
+                console.log("hello");
+                this.$emit("toggle-add-session");
+            },
+        },
+        emits: ['edit-session','duplicate-session', 'delete-session', 'toggle-reminder', 'toggle-add-session']
     }
 </script>
 
 <style scoped>
+    @keyframes fade {
+    from {opacity: 100%;}
+    to {opacity: 0%;}
+    }
+
     .fas {
         cursor: pointer;
     }
@@ -37,6 +48,7 @@
         color: green;
     }
     i {
+        margin:10px 0px;
         display: block;
         width: min-content;
     }
@@ -49,6 +61,13 @@
     }
     .reminder {
         border-top: 2px solid green;
+    }
+    .new {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(5, 197, 255, 0.691);
+        animation-name: fade;
+        animation-duration: 1s;
+        animation-direction: reverse;
+
     }
     div {
         background-color: rgb(234, 234, 234);
