@@ -79,31 +79,24 @@ export default {
     },
     toggleAddSession() {
       this.showAddSession=!this.showAddSession;
-    }
+    },
+
+    async fetchSessions() {
+      const res = await fetch('api/sessions')
+      const data = await res.json()
+      return data
+    },
+    async fetchSession(id) {
+      const res = await fetch(`api/sessions/${id}`)
+      const data = await res.json()
+      return data
+    },
   },
-  created() {
-    this.sessions = [
-      {
-        id: 0,
-        date: "2022-08-03",
-        exercises: ["Push-ups", "Goblet Squats", "Kettlebell Snatch", "Kettlebell Halo"],
-        sets: 3,
-        reps: 10,
-        reminder: false,
-        new: false,
-      },
-      {
-        id: 1,
-        date: "2022-08-05",
-        exercises: [ "Mountain Climbers","Kettlebell Swing","Kettlebell Row","Kettlebell Halo"],
-        sets: 3,
-        reps: 10,
-        reminder: true,
-        new:false,
-      },
-    ]
+  async created() {
+    this.sessions =  await this.fetchSessions()
   }
 }
+
 </script>
 
 <style>
