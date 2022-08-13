@@ -2,8 +2,11 @@
     <div :class="[session.reminder ? 'reminder': '', session.new ? 'new': '', 'session_card']">
         <div class="card_inner_div">
             <h3>{{session.date}} </h3>
-            <h5>{{session.sets}} x {{session.reps}}</h5>
-            <p v-for="exercise in session.exercises">{{exercise}}</p>
+            <!-- <h5>{{session.sets}} x {{session.reps}}</h5> -->
+            <div v-for="exercise in session.exercises">
+                <p>{{exercise.exercise}}</p>
+                <p style="padding-left: 20px;">{{exercise.sets}} x {{exercise.reps}}</p>
+            </div>
         </div>
         <div class="icons">
             <i @click="$emit('toggle-reminder', session.id)" class="fas fa-thin fa-bell"></i> 

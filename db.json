@@ -4,29 +4,31 @@
     {
       "id": 0,
       "date": "2022-08-03",
-      "exercises": ["Push-ups", "Goblet Squats", "Kettlebell Snatch", "Kettlebell Halo"],
-      "sets": 3,
-      "reps": 10,
+      "exercises": [
+        {
+          "exercise": "Push-ups", 
+          "sets": 3,
+          "reps": 10
+        },
+        {
+          "exercise": "Goblet Squats", 
+          "sets": 3,
+          "reps": 15
+        },
+        {
+          "exercise": "Kettlebell Snatch", 
+          "sets": 5,
+          "reps": 5
+        },
+        {
+          "exercise": "Kettlebell Halo", 
+          "sets": 5,
+          "reps": 12
+        }
+      ],
+
       "reminder": false,
       "new": false
-    },
-    {
-      "id": 1,
-      "date": "2022-08-05",
-      "exercises": [ "Mountain Climbers","Kettlebell Swing","Kettlebell Row","Kettlebell Halo"],
-      "sets": 3,
-      "reps": 10,
-      "reminder": true,
-      "new":false
-    },
-    {
-      "id": 2,
-      "date": "2022-08-05",
-      "exercises": [ "Mountain Climbers","Kettlebell Swing","Kettlebell Row","Kettlebell Halo"],
-      "sets": 3,
-      "reps": 10,
-      "reminder": true,
-      "new":false
     }
-]
+  ]
 }

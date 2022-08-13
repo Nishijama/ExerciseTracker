@@ -3,21 +3,21 @@
     <div class="form-control">
         <input type="date" id="session_date" v-model="date" name="session_date" placeholder="date.">
     </div>
-    <div class="form-control">
+    <!-- <div class="form-control">
         <input type="number" name="sets" id="session_sets" v-model="sets" placeholder="sets.">
     </div>
     <div class="form-control">
         <input type="number" name="reps" id="session_reps" v-model="reps" placeholder="reps."> 
-    </div>
+    </div> -->
     <div class="form-control">
         <input type="number" name="exercise_count" v-model="exercise_count" id="session_exercise_count" placeholder="number of exercises."> 
     </div>
-
-
-    <div class="form-control" v-for="index in exercise_count" :exercise_count=exercise_count :key="index">
-        <input type="text" class="exercise" v-model="exercises[index]"  :id="index" :placeholder="index">
+    
+    <div v-for="index in exercise_count" :exercise_count=exercise_count :key="index" class="form-control form-control-inline">
+            <input type="text" class="exercise" v-model="exercises[index]['exercise']" :id="index" placeholder="exercise.">
+            <input type="number" name="sets" v-model="exercises[index]['sets']" id="session_sets" placeholder="sets.">
+            <input type="number" name="reps" v-model="exercises[index]['reps']" id="session_reps" placeholder="reps."> 
     </div>
-
 
     <div class="form-control form-control-check">
         <input type="checkbox" v-model="reminder" name="reminder" id="reminder">
@@ -34,8 +34,8 @@
         data() {
             return {
                 date: '',
-                sets: '',
-                reps: '',
+                // sets: '',
+                // reps: '',
                 exercise_count: '',
                 exercises: [],
                 reminder: false,
@@ -81,6 +81,7 @@
 }
 .form-control label {
   display: block;
+
 }
 .form-control input {
   width: 100%;
@@ -88,6 +89,10 @@
   margin: 5px;
   padding: 3px 7px;
   font-size: 17px;
+}
+
+.form-control-inline input {
+    width:30%;
 }
 .form-control-check {
   display: flex;
