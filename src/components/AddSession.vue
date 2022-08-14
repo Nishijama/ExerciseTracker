@@ -3,20 +3,14 @@
     <div class="form-control">
         <input type="date" id="session_date" v-model="date" name="session_date" placeholder="date.">
     </div>
-    <!-- <div class="form-control">
-        <input type="number" name="sets" id="session_sets" v-model="sets" placeholder="sets.">
-    </div>
-    <div class="form-control">
-        <input type="number" name="reps" id="session_reps" v-model="reps" placeholder="reps."> 
-    </div> -->
     <div class="form-control">
         <input type="number" name="exercise_count" v-model="exercise_count" id="session_exercise_count" placeholder="number of exercises."> 
     </div>
     
     <div v-for="index in exercise_count" :exercise_count=exercise_count :key="index" class="form-control form-control-inline">
-            <input type="text" class="exercise" v-model="exercises[index]['exercise']" :id="index" placeholder="exercise.">
-            <input type="number" name="sets" v-model="exercises[index]['sets']" id="session_sets" placeholder="sets.">
-            <input type="number" name="reps" v-model="exercises[index]['reps']" id="session_reps" placeholder="reps."> 
+            <input type="text" name="exercise" v-model="exercises[index]" :id="'exercise'+index" placeholder="exercise.">
+            <input type="number" name="sets" v-model="sets[index]" :id="'sets'+index" placeholder="sets.">
+            <input type="number" name="reps" v-model="reps[index]" :id="'reps'+index" placeholder="reps."> 
     </div>
 
     <div class="form-control form-control-check">
@@ -29,38 +23,54 @@
 
 
 <script>
+import { thisTypeAnnotation } from '@babel/types';
+
     export default {
         name: 'AddSession',
         data() {
             return {
                 date: '',
-                // sets: '',
-                // reps: '',
                 exercise_count: '',
                 exercises: [],
+                sets: [],
+                reps: [],
                 reminder: false,
-            }
+                }
         },
         methods: {
             onSubmit(e) {
                 e.preventDefault()
-                if (!this.date || !this.sets || !this.reps) {
+
+                console.log(this.exercises);
+                console.log(this.sets);
+                console.log(this.reps);
+
+                if (!this.date) {
                     alert('Please fill in the details');
                     return;
                 }
+
+                let temp_exercises =[]
+                for (let i=1; i<this.exercises.length; i++) {
+                    let exercise_instance = {
+                        exercise: this.exercises[i],
+                        sets: this.sets[i],
+                        reps: this.reps[i]
+                    }
+                    temp_exercises = [...temp_exercises, exercise_instance]
+                }
+
                 const newSession = {
                     id: Math.floor(Math.random()*100000),
                     date: this.date,
-                    sets: this.sets,
-                    reps: this.reps,
-                    exercises: this.exercises,
+                    exercises: temp_exercises,
                     reminder: this.reminder,
                 }
                 this.date = ''
-                this.sets = ''
-                this.reps = ''
-                this.exercise_count = ''
                 this.exercises = []
+                this.exercise_count = ''
+                this.sets = []
+                this.reps = []
                 this.reminder = false
 
                 this.$emit('add-session', newSession);

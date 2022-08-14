@@ -37,8 +37,9 @@
 
 <style scoped>
     @keyframes fade {
-    from {opacity: 100%;}
-    to {opacity: 0%;}
+    0% {opacity: 100%; box-shadow: none;}
+    50%{opacity: 100%; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(5, 197, 255, 0.691) }
+    100% {opacity: 0%; box-shadow: none;}
     }
 
     .fas {
@@ -66,7 +67,6 @@
         border-top: 2px solid green;
     }
     .new {
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(5, 197, 255, 0.691);
         animation-name: fade;
         animation-duration: 1s;
         animation-direction: reverse;
