@@ -48,12 +48,27 @@ export default {
         this.sessions = this.sessions.filter((session) => session.id !== id)
       }
     },
-    addSession(newSession) {
+
+    async addSession(newSession) {
+      console.log(JSON.stringify(newSession));
+      
+      const res = await fetch('api/sessions', {
+        method: "POST",
+        headers: {
+          'Content-type': 'aplication/json'
+        },
+        body: JSON.stringify(newSession)
+      })
+
+      const data = await res.json()
+
+
       this.sessions = this.sessions.map( (session) =>
       session.id !== newSession.id ? {...session, new: false} : session)
       newSession.new = true;
       this.sessions = [...this.sessions, newSession]
     },
+
     editSession(id) {
       console.log("Editing session nr", id);
     },

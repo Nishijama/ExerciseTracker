@@ -1,34 +1,38 @@
-
-{ 
-"sessions": [
+{
+  "sessions": [
     {
       "id": 0,
       "date": "2022-08-03",
       "exercises": [
         {
-          "exercise": "Push-ups", 
+          "exercise": "Push-ups",
           "sets": 3,
           "reps": 10
         },
         {
-          "exercise": "Goblet Squats", 
+          "exercise": "Goblet Squats",
           "sets": 3,
           "reps": 15
         },
         {
-          "exercise": "Kettlebell Snatch", 
+          "exercise": "Kettlebell Snatch",
           "sets": 5,
           "reps": 5
         },
         {
-          "exercise": "Kettlebell Halo", 
+          "exercise": "Kettlebell Halo",
           "sets": 5,
           "reps": 12
         }
       ],
-
       "reminder": false,
       "new": false
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
     }
   ]
 }

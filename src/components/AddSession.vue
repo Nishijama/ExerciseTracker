@@ -50,7 +50,7 @@ import { thisTypeAnnotation } from '@babel/types';
                     return;
                 }
 
-                let temp_exercises =[]
+                let temp_exercises = []
                 for (let i=1; i<this.exercises.length; i++) {
                     let exercise_instance = {
                         exercise: this.exercises[i],
@@ -75,7 +75,6 @@ import { thisTypeAnnotation } from '@babel/types';
 
                 this.$emit('add-session', newSession);
                 this.$emit("toggle-add-session");
-
             }, 
         }
     }
