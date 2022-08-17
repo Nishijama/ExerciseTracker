@@ -29,10 +29,65 @@
       "new": false
     },
     {
-      "id": 1
+      "id": 61331,
+      "date": "2022-08-17",
+      "exercises": [
+        {
+          "exercise": "Push-ups",
+          "sets": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Kettlebell Halo",
+          "sets": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Crunches",
+          "sets": 4,
+          "reps": 12
+        }
+      ],
+      "reminder": false
     },
     {
-      "id": 2
+      "id": 2,
+      "date": "2022-08-17",
+      "exercises": [
+        {
+          "exercise": "Push-ups",
+          "sets": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Kettlebell Halo",
+          "sets": 4,
+          "reps": 12
+        },
+        {
+          "exercise": "Crunches",
+          "sets": 4,
+          "reps": 12
+        }
+      ],
+      "reminder": false
+    },
+    {
+      "id": 15201,
+      "date": "2022-08-18",
+      "exercises": [
+        {
+          "exercise": "Stretching",
+          "sets": 1,
+          "reps": 1
+        },
+        {
+          "exercise": "Jogging",
+          "sets": 1,
+          "reps": 1
+        }
+      ],
+      "reminder": true
     }
   ]
 }

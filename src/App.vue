@@ -55,7 +55,7 @@ export default {
       const res = await fetch('api/sessions', {
         method: "POST",
         headers: {
-          'Content-type': 'aplication/json'
+          'Content-type': 'application/json'
         },
         body: JSON.stringify(newSession)
       })
@@ -72,21 +72,36 @@ export default {
     editSession(id) {
       console.log("Editing session nr", id);
     },
+
     setNew(newSession) {
       this.sessions = this.sessions.map( (session) =>
         session.id !== newSession.id ? {...session, new: false} : session)
       newSession.new = true
     },
 
-    duplicateSession(session) {
+    async duplicateSession(session) {
       console.log("Duplicated session nr", session.id);
+
       let newSession = JSON.parse(JSON.stringify(session))
       newSession.id = this.sessions.length
+      //
+      const res = await fetch('api/sessions', {
+        method: "POST",
+        headers: {
+          'Content-type': 'application/json'
+        },
+        body: JSON.stringify(newSession)
+      })
+      
+      const data = await res.json()
+      //
       this.setNew(newSession)
       // this.sessions.unshift(newSession)
       this.sessions = [...this.sessions, newSession]
       console.log(this.sessions);
     },
+
+
     toggleReminder(id) {
       console.log("reminder set for session", id);
       this.sessions = this.sessions.map( (session) =>
