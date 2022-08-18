@@ -43,9 +43,18 @@ export default {
   },
 
   methods: {
-    deleteSession(id) {
+    async deleteSession(id) {
         if (confirm("are you sure?")) {
-        this.sessions = this.sessions.filter((session) => session.id !== id)
+
+          const res = await fetch(`api/sessions/${id}`, {
+            method: "DELETE"
+          })
+
+          if (res.status === 200) {
+            this.sessions = this.sessions.filter((session) => session.id !== id)
+          } else {
+            alert(`Error deleting session`)
+          }
       }
     },
 
@@ -71,6 +80,7 @@ export default {
 
     editSession(id) {
       console.log("Editing session nr", id);
+      // TODO
     },
 
     setNew(newSession) {
@@ -83,7 +93,7 @@ export default {
       console.log("Duplicated session nr", session.id);
 
       let newSession = JSON.parse(JSON.stringify(session))
-      newSession.id = this.sessions.length
+      newSession.id = this.sessions.length 
       //
       const res = await fetch('api/sessions', {
         method: "POST",
@@ -102,11 +112,23 @@ export default {
     },
 
 
-    toggleReminder(id) {
+    async toggleReminder(id) {
+      const sessionToToggle = await this.fetchSession(id);
+      const updatedSession = {...sessionToToggle, reminder: !sessionToToggle.reminder}
+
+      const res = await fetch(`api/sessions/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify(updatedSession)
+      })
+      const data = await res.json()
       console.log("reminder set for session", id);
       this.sessions = this.sessions.map( (session) =>
-      session.id === id ? {...session, reminder: !session.reminder} : session)
+      session.id === id ? {...session, reminder: data.reminder} : session)
     },
+
     toggleAddSession() {
       this.showAddSession=!this.showAddSession;
     },

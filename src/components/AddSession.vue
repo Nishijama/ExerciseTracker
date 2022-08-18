@@ -61,7 +61,7 @@ import { thisTypeAnnotation } from '@babel/types';
                 }
 
                 const newSession = {
-                    id: Math.floor(Math.random()*100000),
+                    // id: Math.floor(Math.random()*100000),
                     date: this.date,
                     exercises: temp_exercises,
                     reminder: this.reminder,
