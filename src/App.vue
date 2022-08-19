@@ -75,7 +75,7 @@ export default {
       this.sessions = this.sessions.map( (session) =>
       session.id !== newSession.id ? {...session, new: false} : session)
       newSession.new = true;
-      this.sessions = [...this.sessions, newSession]
+      this.sessions = [...this.sessions, data]
     },
 
     editSession(id) {
@@ -93,7 +93,7 @@ export default {
       console.log("Duplicated session nr", session.id);
 
       let newSession = JSON.parse(JSON.stringify(session))
-      newSession.id = this.sessions.length 
+      newSession.id = undefined
       //
       const res = await fetch('api/sessions', {
         method: "POST",
@@ -106,11 +106,9 @@ export default {
       const data = await res.json()
       //
       this.setNew(newSession)
-      // this.sessions.unshift(newSession)
-      this.sessions = [...this.sessions, newSession]
+      this.sessions = [...this.sessions, data]
       console.log(this.sessions);
     },
-
 
     async toggleReminder(id) {
       const sessionToToggle = await this.fetchSession(id);
